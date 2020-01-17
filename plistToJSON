@@ -1,0 +1,12 @@
+#!/bin/bash
+if test $# != 1; then
+    echo "Usage: $0 <plist file>"
+    exit
+fi
+json=$(plutil -convert json $1 -o - 2> /dev/null)
+if test $? == 0; then
+    printf "$json"
+else
+    echo "'$1' is not a valid plist file." 1>&2
+    exit 1
+fi
